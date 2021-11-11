@@ -4,7 +4,7 @@ const hbs=require('hbs')
 const { query } = require('express')
 const app = express()
 app.set('view engine', 'hbs')
-
+const port=process.env.PORT || 3000
 const forecast=require('./utils/forecast')
 const geocode=require('./utils/geoCode')
 
@@ -12,6 +12,7 @@ const publicDirectoryPath=path.join(__dirname,'../public')
 const viewspath=path.join(__dirname,'../templates/views')
 const partialpath=path.join(__dirname,'../templates/partials')
 app.set('views',viewspath)
+
 app.use(express.static(publicDirectoryPath))
 hbs.registerPartials(partialpath)
 app.get('',(req,res)=>{
@@ -77,6 +78,6 @@ app.get('*',(req,res)=>{
     })
 })
 
-app.listen(3000, () => {
-    console.log('server is up on port 3000')
+app.listen(port, () => {
+    console.log('server is up on port '+port)
 })
